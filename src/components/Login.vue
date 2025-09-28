@@ -16,9 +16,9 @@
       <button style="background-color: pink;" @click="login">Entrar</button>
       <p v-if="error" style="color:pink; font-style: italic, bold;">{{ error }}</p>
     </div>
-  </div>
+  </div>src = "@/assets
   <div class="image-container">
-    <img class="image" height="80px" src = "@/assets/img/strawberryicon.png"/>
+    <img class="image" src = "@/assets/img/strawberryicon.png"/>
   </div>
 </div>
 
