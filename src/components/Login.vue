@@ -7,16 +7,15 @@
   </div>
   <div class="center-container">
     <div class="rectangle">
-      <br/>
       <h1 class="secondary">Login</h1>
       <input class="text-box" v-model="username" placeholder="Usuário" />
       <br/><br/>
       <input class="text-box" v-model="password" type="password" placeholder="Senha" />
       <br/><br/>
-      <button style="background-color: pink;" @click="login">Entrar</button>
+      <button class="button-class" @click="login">Entrar</button>
       <p v-if="error" style="color:pink; font-style: italic, bold;">{{ error }}</p>
     </div>
-  </div>src = "@/assets
+  </div>
   <div class="image-container">
     <img class="image" src = "@/assets/img/strawberryicon.png"/>
   </div>
@@ -74,7 +73,7 @@ html, body, #app {
 }
 .center-container {
   flex: 1;
-  display: flex;
+  display: inline-block;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -97,7 +96,7 @@ html, body, #app {
 
 .rectangle {
   width: 300px;
-  height: 260px;
+  height: 280px;
   background-color: rgb(41, 55, 102);
   border-radius: 25px;
 }
@@ -124,7 +123,16 @@ html, body, #app {
 
 .text-box {
   background-color: pink;
-  color: rgb(41, 55, 102)
+  padding: 2%;
+  border-radius: 20px;
+  color: rgb(41, 55, 102);
+}
+
+.button-class {
+  background-color: pink;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: bolder;
 }
 
 </style>

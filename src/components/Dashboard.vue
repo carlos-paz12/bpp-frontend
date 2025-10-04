@@ -4,23 +4,60 @@
       ⋆ ˚｡⋆୨୧˚  PONTEIRO ˚୨୧⋆｡˚ ⋆
     </h1>
   </div>
+  <header/>
+
+  
   <div class="center-container">
-    <div class="rectangle">
-    <h1>Dashboard</h1>
-    <br/><br/><br/>
-    /* colocar tabela aqui*/
-    <button @click="marcarPonto">Marcar Ponto</button>
-    <ul>
-      <li v-for="r in registros" :key="r">{{ r }}</li>
-    </ul>
-  </div>
+    <div class="dashboard-rectangle">
+      <h1>Dashboard</h1>
+      
+      <!--<button @click="marcarPonto">Marcar Ponto</button>-->
+      <ul>
+        <li v-for="r in registros" :key="r">{{ r }}</li>
+        <link rel="stylesheet" href="style.css">
+      </ul>
+      
+      <button class="button-class" @click="() => changePopup('buttonTrigger')" >
+        Marcar Ponto
+      </button>
+      <Popup v-if="triggers.buttonTrigger"
+              :changePopup="() => changePopup('buttonTrigger')">
+        <h2>Ponto registrado com sucesso!</h2>
+      </Popup>
+
+
+
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import { ref } from 'vue';
+import Popup from './Popup.vue';
+import Header from './Header.vue';
 
 export default {
+  components: {
+    Header, Popup
+  },
+
+  setup() {
+
+    const triggers = ref({
+      buttonTrigger: false
+    })
+
+    const changePopup = (trigger) => {
+      triggers.value[trigger] = !triggers.value[trigger];
+    }
+    return {
+      Popup,
+      triggers,
+      changePopup
+    }
+  },
+
   data() {
     return { registros: [] }
   },
@@ -53,7 +90,6 @@ export default {
 html, body, #app {
   height: 100%;
   margin: 0;
-  /*background-color: pink;*/
   background-image: url('@/assets/img/pink-strawberries.png');
   background-size: cover;
   background-position: center;
@@ -92,9 +128,10 @@ html, body, #app {
   color: pink;
 }
 
-.rectangle {
+.dashboard-rectangle {
+  
   width: 800px;
-  height: 500px;
+  height: 280px;
   background-color: rgb(41, 55, 102);
   border-radius: 25px;
 }
