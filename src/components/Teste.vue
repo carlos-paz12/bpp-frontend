@@ -9,16 +9,20 @@
                 <h2>Ponto registrado com sucesso!</h2>
             </Popup>
     </main>
+    <DashboardBox>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur sequi ratione esse illo sapiente saepe inventore minima repudiandae consequuntur hic beatae soluta, nisi ipsam? Esse, nostrum numquam! Minus, eligendi voluptatum? </p>
+    </DashboardBox>
 </template>
 
 <script>
-import Popup from './Popup.vue';
-import Header from './Header.vue';
+import Popup from './items/Popup.vue';
+import Header from './items/Header.vue';
 import { ref } from 'vue';
+import DashboardBox from './items/ContentBlock.vue';
 
 export default {
     components: {
-        Header, Popup
+        Header, Popup, DashboardBox
     },
     setup() {
 

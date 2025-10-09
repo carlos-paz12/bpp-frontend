@@ -1,10 +1,6 @@
 <template>
 <div>
-  <div class="top-container">
-    <h1 class="menu">
-      ⋆ ˚｡⋆୨୧˚  PONTEIRO ˚୨୧⋆｡˚ ⋆
-    </h1>
-  </div>
+  <Header/>
   <div class="center-container">
     <div class="rectangle">
       <h1 class="secondary">Login</h1>
@@ -25,8 +21,14 @@
 
 <script>
 import axios from 'axios'
+import Header from './items/Header.vue';
 
 export default {
+  
+  components: {
+    Header
+  },
+
   data() {
     return {
       username: '',
@@ -51,88 +53,3 @@ export default {
 }
 </script>
 
-<style>
-html, body, #app {
-  height: 100%;
-  margin: 0;
-  /*background-color: pink;*/
-  background-image: url('@/assets/img/pink-strawberries.png');
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-}
-
-.secondary {
-  color: pink;
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  height: 100%
-}
-.center-container {
-  flex: 1;
-  display: inline-block;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 60vh;
-  width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  color: pink;
-}
-
-.top-container {
-  display: flex;
-  justify-content: center;
-  padding-top: 20px;
-  align-items: flex-start;
-  text-align: center;
-  height: 15vh;
-  font-family: Arial, Helvetica, sans-serif;
-  color: pink;
-}
-
-.rectangle {
-  width: 300px;
-  height: 280px;
-  background-color: rgb(41, 55, 102);
-  border-radius: 25px;
-}
-
-.menu {
-  width: 800px;
-  height: 50px;
-  background-color: rgb(41, 55, 102);
-  border-radius: 25px;
-  font-size: 30px;
-}
-
-.image {
-  height:100px;
-  align-content: center;
-}
-
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-}
-
-.text-box {
-  background-color: pink;
-  padding: 2%;
-  border-radius: 20px;
-  color: rgb(41, 55, 102);
-}
-
-.button-class {
-  background-color: pink;
-  padding: 10px;
-  border-radius: 20px;
-  font-weight: bolder;
-}
-
-</style>
