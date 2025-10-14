@@ -48,7 +48,7 @@ html, body, #app {
 
 
 .dashboard-rectangle {
-  
+
   width: 800px;
   height: auto;
   background-color: rgb(41, 55, 102);
@@ -91,4 +91,34 @@ html, body, #app {
   font-weight: bolder;
   margin-left: 40px;
   margin-right: 40px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem; /* Espaço abaixo da tabela */
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+center-container {
+  display: flex;
+  justify-content: center;   /* Centraliza horizontalmente */
+  align-items: center;       /* Centraliza verticalmente */
+  height: 100vh;             /* Ocupa toda a altura da tela */
+}
+
+.dashboard-rectangle {
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

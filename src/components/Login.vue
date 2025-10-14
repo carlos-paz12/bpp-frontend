@@ -24,7 +24,7 @@ import axios from 'axios'
 import Header from './items/Header.vue';
 
 export default {
-  
+
   components: {
     Header
   },
@@ -36,20 +36,40 @@ export default {
       error: ''
     }
   },
-  methods: {
-    async login() {
-      try {
-        const res = await axios.post('http://localhost:8080/api/login', {
-          username: this.username,
-          password: this.password
-        })
-        localStorage.setItem('token', res.data.token)
-        this.$router.push('/dashboard')
-      } catch (err) {
-        this.error = err.response?.data?.error || 'Erro de conexão'
+methods: {
+  async login() {
+    try {
+      const res = await axios.post('http://localhost:8080/auth/login', {
+        username: this.username,
+        password: this.password
+      });
+
+      console.log('Resposta do backend:', res.data);
+
+      if (res.data.token) {
+  localStorage.setItem('token', res.data.token);
+  localStorage.setItem('role', res.data.role);
+
+  const role = res.data.role?.toUpperCase();
+  if (role === 'ADMIN') {
+    this.$router.push('/dashboardGerente');
+  } else if (role === 'BOLSISTA') {
+    this.$router.push('/dashboardBolsista');
+  } else if (role === 'TECNICO') {
+    this.$router.push('/dashboardGerente');
+  } else {
+    this.$router.push('/');
+  }
+      } else {
+        this.error = 'Token não retornado pelo servidor';
       }
+    } catch (err) {
+      console.error('Erro na requisição:', err.response);
+      this.error = err.response?.data?.error || 'Erro de conexão';
     }
   }
+}
+
 }
 </script>
 

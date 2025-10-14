@@ -1,18 +1,45 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../components/Login.vue'
 import DashboardBolsista from '@/components/DashboardBolsista.vue'
-import Teste from '@/components/Teste.vue'
 import DashboardGerente from '@/components/DashboardGerente.vue'
 import NovoUsuarioBolsista from '@/components/NovoUsuarioBolsista.vue'
 import NovoUsuarioGerente from '@/components/NovoUsuarioGerente.vue'
+import Teste from '@/components/Teste.vue'
 
 const routes = [
   { path: '/', component: Login },
-  { path: '/dashboardBolsista', component: DashboardBolsista },
-  { path: '/teste', component: Teste },
-  { path: '/dashboardGerente', component: DashboardGerente},
-  { path: '/novoUsuarioBolsista', component: NovoUsuarioBolsista},
-  { path: '/novoUsuarioGerente', component: NovoUsuarioGerente}
+
+  // Rotas protegidas com roles específicas
+  {
+    path: '/dashboardBolsista',
+    component: DashboardBolsista,
+    meta: { requiresAuth: true, role: 'BOLSISTA' }
+  },
+  {
+    path: '/dashboardGerente',
+    component: DashboardGerente,
+    meta: { requiresAuth: true, role: 'ADMIN' } // ou "TECNICO", se for o caso
+  },
+  {
+    path: '/novoUsuarioBolsista',
+    component: NovoUsuarioBolsista,
+    meta: { requiresAuth: true, role: 'ADMIN' }
+  },
+  {
+    path: '/novoUsuarioGerente',
+    component: NovoUsuarioGerente,
+    meta: { requiresAuth: true, role: 'ADMIN' }
+  },
+  {
+    path: '/teste',
+    component: Teste,
+    meta: { requiresAuth: true } // qualquer usuário logado pode acessar
+  },
+  // Fallback para rotas não encontradas
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
+  }
 ]
 
 const router = createRouter({
@@ -20,4 +47,27 @@ const router = createRouter({
   routes
 })
 
-export default router
+/*
+  🔒 Guard global para autenticação e autorização
+*/
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role')?.toUpperCase();
+
+  // Se a rota requer autenticação e o usuário não tem token → volta pro login
+  if (to.meta.requiresAuth && !token) {
+    next('/');
+    return;
+  }
+
+  // Se a rota tem restrição de role e o usuário não tem permissão
+  if (to.meta.role && role !== to.meta.role.toUpperCase()) {
+    alert('Acesso negado! Você não tem permissão para acessar esta página.');
+    next('/'); // redireciona para o login (ou outra página segura)
+    return;
+  }
+
+  next();
+});
+
+export default router;

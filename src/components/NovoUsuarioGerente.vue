@@ -7,6 +7,10 @@
             <h1 class="secondary">Cadastro de gerente</h1>
             <input class="text-box" v-model="username" placeholder="Usuário" />
             <br/><br/>
+            <input class="text-box" v-model="nome" placeholder="nome" />
+            <br/><br/>
+            <input class="text-box" v-model="email" type="email" placeholder="Email" />
+            <br/><br/>
             <input class="text-box" v-model="password" type="password" placeholder="Senha" />
             <br/><br/>
             <button class="button-class">Cadastrar</button>
