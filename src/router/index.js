@@ -7,26 +7,26 @@ import NovoUsuarioGerente from '@/components/NovoUsuarioGerente.vue'
 import Teste from '@/components/Teste.vue'
 
 const routes = [
-  { path: '/', component: Login },
+  { path: '/spe/api/auth/login', component: Login },
 
   // Rotas protegidas com roles específicas
   {
-    path: '/dashboardBolsista',
+    path: '/spe/api/dashboardBolsista',
     component: DashboardBolsista,
     meta: { requiresAuth: true, role: 'BOLSISTA' }
   },
   {
-    path: '/dashboardGerente',
+    path: '/spe/api/admin/dashboardGerente',
     component: DashboardGerente,
     meta: { requiresAuth: true, role: 'ADMIN' } // ou "TECNICO", se for o caso
   },
   {
-    path: '/novoUsuarioBolsista',
+    path: '/spe/api/admin/novoUsuarioBolsista',
     component: NovoUsuarioBolsista,
     meta: { requiresAuth: true, role: 'ADMIN' }
   },
   {
-    path: '/novoUsuarioGerente',
+    path: '/spe/api/admin/novoUsuarioGerente',
     component: NovoUsuarioGerente,
     meta: { requiresAuth: true, role: 'ADMIN' }
   },
@@ -38,7 +38,7 @@ const routes = [
   // Fallback para rotas não encontradas
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/'
+    redirect: '/spe/api/auth/login'
   }
 ]
 

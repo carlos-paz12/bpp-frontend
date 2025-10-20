@@ -3,7 +3,8 @@
 
   <div class="center-container">
     <div class="dashboard-rectangle">
-      <h1>Meus Pontos</h1>
+       <h1>Dashboard</h1>
+
       <div style="align-self:center;">
       <table>
         <thead>
@@ -24,7 +25,11 @@
         </tbody>
       </table>
       </div>
-      <h1>Dashboard</h1>
+           <h2> {{ totalHoras }}</h2>
+      <!-- Novo input para exibir o total -->
+      <div>
+
+      </div>
 
       <button class="button-class" @click="ativarButton('buttonTrigger')">
         {{ pontoAtivo ? 'Registrar Saída' : 'Registrar Entrada' }}
@@ -43,6 +48,18 @@ import { ref } from 'vue'
 import Popup from './items/Popup.vue'
 import Header from './items/Header.vue'
 
+// Função para verificar se o token é válido
+function isTokenValid(token) {
+  try {
+    const decoded = JSON.parse(atob(token.split('.')[1])); // Decodifica o payload do JWT
+    const currentTime = Date.now() / 1000; // Timestamp atual em segundos
+    return decoded.exp > currentTime; // Retorna true se o token ainda não expirou
+  } catch (error) {
+    console.error('Erro ao verificar validade do token:', error);
+    return false; // Retorna false se o token for inválido
+  }
+}
+
 export default {
   components: { Header, Popup },
 
@@ -59,6 +76,7 @@ export default {
       registros: [],
       pontoAtivo: false,
       mensagemPopup: '',
+      totalHoras: '', // Adicionado para armazenar o total de horas
     }
   },
 
@@ -71,11 +89,30 @@ export default {
   methods: {
     async carregarRegistros() {
       const token = localStorage.getItem('token')
-      const res = await axios.get('http://localhost:8080/spe/api/bolsista/meus-pontos', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      // agora os dados vêm direto do backend (um array)
-      this.registros = res.data
+
+      if (!isTokenValid(token)) {
+        this.$router.push('/spe/api/auth/login')
+        return
+      }
+
+      try {
+        // Faz as duas requisições simultaneamente
+        const [res, total] = await Promise.all([
+          axios.get('http://localhost:8080/spe/api/bolsista/meus-pontos', {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          axios.get('http://localhost:8080/spe/api/bolsista/total-horas', {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+        ])
+
+        // Atualiza os registros e o total de horas
+        this.registros = res.data
+        this.totalHoras = total.data // Atualiza o total de horas
+      } catch (error) {
+        console.error('Erro ao carregar registros:', error)
+        this.$router.push('/spe/api/auth/login') // Redireciona para login em caso de erro
+      }
     },
 
     async ativarButton(trigger) {

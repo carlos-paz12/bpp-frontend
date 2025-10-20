@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-reserved-component-names -->
 <template>
   <Header/>
 
@@ -17,7 +18,7 @@
         </thead>
         <tbody>
           <tr v-for="(registro, index) in registros" :key="index">
-            <td>{{ registro.id }}</td>
+            <td>{{ registro.nome }}</td>
             <td>{{ formatarData(registro.horaDeEntrada) }}</td>
             <td>{{ formatarHora(registro.horaDeEntrada) }}</td>
             <td>{{ registro.horaDeSaida ? formatarHora(registro.horaDeSaida) : '---' }}</td>
@@ -43,8 +44,21 @@ import axios from 'axios';
 import Header from './items/Header.vue';
 import ContentBlock from './items/ContentBlock.vue';
 
+function isTokenValid(token) {
+  try {
+    const decoded = JSON.parse(atob(token.split('.')[1])); // Decodifica o payload do JWT
+    const currentTime = Date.now() / 1000; // Timestamp atual em segundos
+    return decoded.exp > currentTime; // Retorna true se o token ainda não expirou
+  } catch (error) {
+    console.error('Erro ao verificar validade do token:', error);
+    return false; // Retorna false se o token for inválido
+  }
+}
+
 export default {
   components: {
+
+    // eslint-disable-next-line vue/no-reserved-component-names
     Header, ContentBlock
   },
 
@@ -65,18 +79,15 @@ export default {
     const res = await axios.get('http://localhost:8080/spe/api/admin/pontos', {
       headers: { Authorization: `Bearer ${token}` }
     });
-    console.log('Dados recebidos do backend:', res.data); // 🔹 verifique aqui
     this.registros = res.data;
+   if (!isTokenValid(token)) {
+      this.$router.push('/spe/api/auth/login');
+      return;
+    }
+
   } catch (error) {
-    if (error.response) {
-      // O backend respondeu com código de erro
-      console.error('Erro na resposta do backend:', error.response.status, error.response.data);
-    } else if (error.request) {
-      // A requisição foi feita, mas sem resposta
-      console.error('Nenhuma resposta do backend:', error.request);
-    } else {
-      // Erro ao configurar a requisição
-      console.error('Erro ao configurar requisição:', error.message);
+
+      console.error('Erro na  requisição:', error.message);
     }
   }
 },
@@ -91,5 +102,4 @@ export default {
       return new Date(datetime).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     }
   }
-}
 </script>
