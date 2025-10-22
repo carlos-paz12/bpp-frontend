@@ -29,7 +29,7 @@
     </div>
 
     <div style="margin-top: 20px;">
-      <a href="/novoUsuarioBolsista">
+      <a href="/spe/api/admin/novoUsuarioBolsista">
         <button class="button-class">Adicionar Usuário Bolsista</button>
       </a>
       <a href="../novoUsuarioGerente">
@@ -73,24 +73,27 @@ export default {
   },
 
   methods: {
-   async carregarRegistros() {
-  try {
-    const token = localStorage.getItem('token');
-    const res = await axios.get('http://localhost:8080/spe/api/admin/pontos', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    this.registros = res.data;
-   if (!isTokenValid(token)) {
-      this.$router.push('/spe/api/auth/login');
-      return;
-    }
+    async carregarRegistros() {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await axios.get('http://localhost:8080/spe/api/admin/pontos', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        this.registros = res.data;
+        if (!isTokenValid(token)) {
+          //limpar token inválido e redirecionar para login
+          localStorage.removeItem('token');
+          alert('Sua sessão expirou. Por favor, faça login novamente.');
+          this.$router.push('/spe/api/auth/login');
+          return;
+        }
 
-  } catch (error) {
+      } catch (error) {
 
-      console.error('Erro na  requisição:', error.message);
+        console.error('Erro na  requisição:', error.message);
+      }
     }
-  }
-},
+    ,
 
     // Função para formatar data (ex: 12/10/2025)
     formatarData(datetime) {
@@ -102,4 +105,5 @@ export default {
       return new Date(datetime).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     }
   }
+}
 </script>

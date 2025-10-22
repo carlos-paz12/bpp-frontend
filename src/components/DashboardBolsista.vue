@@ -91,6 +91,9 @@ export default {
       const token = localStorage.getItem('token')
 
       if (!isTokenValid(token)) {
+        //limpar token inválido e redirecionar para login
+        localStorage.removeItem('token')
+        alert('Sua sessão expirou. Por favor, faça login novamente.');
         this.$router.push('/spe/api/auth/login')
         return
       }
