@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../components/Login.vue'
-import DashboardBolsista from '@/components/DashboardBolsista.vue'
-import DashboardGerente from '@/components/DashboardGerente.vue'
-import NovoUsuarioBolsista from '@/components/NovoUsuarioBolsista.vue'
-import NovoUsuarioGerente from '@/components/NovoUsuarioGerente.vue'
-import Teste from '@/components/Teste.vue'
+
+import Login from '@/views/LoginView.vue'
+import DashboardBolsista from '@/views/DashboardBolsista.vue'
+import DashboardGerente from '@/views/DashboardTecnicoView.vue'
+import NovoUsuarioBolsista from '@/views/CadastroBolsista.vue'
+import NovoUsuarioGerente from '@/views/CadastroTecnicoView.vue'
 
 const routes = [
   { path: '/spe/api/auth/login', component: Login },
