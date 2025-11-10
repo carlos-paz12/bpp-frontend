@@ -7,8 +7,8 @@ import NovoUsuarioBolsista from '@/views/CadastroBolsistaView.vue'
 import NovoUsuarioGerente from '@/views/CadastroTecnicoView.vue'
 
 const routes = [
-  { path: '/', component: Login },
-
+  { path: '/', redirect: '/login' },
+  { path: '/login', component: Login },
   // Rotas protegidas com roles específicas
   {
     path: '/spe/api/dashboardBolsista',
