@@ -2,34 +2,39 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Login from '@/views/LoginView.vue'
 import DashboardBolsista from '@/views/DashboardBolsistaView.vue'
-import DashboardGerente from '@/views/DashboardTecnicoView.vue'
-import NovoUsuarioBolsista from '@/views/CadastroBolsistaView.vue'
-import NovoUsuarioGerente from '@/views/CadastroTecnicoView.vue'
+import DashboardAdmin from '@/views/DashboardTecnicoView.vue'
+import RegisterView from '@/views/RegisterView.vue'
 
 const routes = [
-  { path: '/', redirect: '/login' },
-  { path: '/login', component: Login },
+  {
+    path: '/',
+    redirect: '/login'
+  },
+  {
+    path: '/login',
+    component: Login
+  },
   // Rotas protegidas com roles específicas
   {
-    path: '/spe/api/dashboardBolsista',
+    path: '/admin/register',
+    component: RegisterView,
+    // meta: { requiresAuth: true, role: 'ADMIN' }
+  },
+  {
+    path: '/bolsista/dashboard',
     component: DashboardBolsista,
-    meta: { requiresAuth: true, role: 'BOLSISTA' }
+    // meta: { requiresAuth: true, role: 'BOLSISTA' }
   },
   {
-    path: '/spe/api/admin/dashboardGerente',
-    component: DashboardGerente,
-    meta: { requiresAuth: true, role: 'ADMIN' } // ou "TECNICO", se for o caso
+    path: '/admin/dashboard',
+    component: DashboardAdmin,
+    // meta: { requiresAuth: true, role: 'ADMIN' }
   },
-  {
-    path: '/spe/api/admin/novoUsuarioBolsista',
-    component: NovoUsuarioBolsista,
-    meta: { requiresAuth: true, role: 'ADMIN' }
-  },
-  {
-    path: '/spe/api/admin/novoUsuarioGerente',
-    component: NovoUsuarioGerente,
-    meta: { requiresAuth: true, role: 'ADMIN' }
-  },
+  // {
+  //   path: '/admin/novoUsuarioAdmin',
+  //   component: NovoUsuarioAdmin,
+  //   // meta: { requiresAuth: true, role: 'ADMIN' }
+  // },
   // {
   //   path: '/teste',
   //   component: Teste,
@@ -38,7 +43,7 @@ const routes = [
   // Fallback para rotas não encontradas
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/spe/api/auth/login'
+    redirect: '/auth/login'
   }
 ]
 
