@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-reserved-component-names -->
 <template>
-  <Header/>
+  <Header />
 
   <ContentBlock>
     <h1>Últimos pontos registrados por bolsistas</h1>
@@ -41,8 +41,8 @@
 
 <script>
 import axios from 'axios';
-import Header from './items/Header.vue';
-import ContentBlock from './items/ContentBlock.vue';
+import Header from '../components/items/Header.vue';
+import ContentBlock from '../components/items/ContentBlock.vue';
 
 function isTokenValid(token) {
   try {

@@ -1,32 +1,32 @@
 <template>
 
-    <Header/>
+    <Header />
 
     <div class="center-container">
         <div class="rectangle">
             <h1 class="secondary">Cadastro de gerente</h1>
             <input class="text-box" v-model="username" placeholder="Usuário" />
-            <br/><br/>
+            <br /><br />
             <input class="text-box" v-model="nome" placeholder="nome" />
-            <br/><br/>
+            <br /><br />
             <input class="text-box" v-model="email" type="email" placeholder="Email" />
-            <br/><br/>
+            <br /><br />
             <input class="text-box" v-model="password" type="password" placeholder="Senha" />
-            <br/><br/>
+            <br /><br />
             <button class="button-class">Cadastrar</button>
             <p v-if="error" style="color:pink; font-style: italic, bold;">{{ error }}</p>
         </div>
     </div>
 
     <div class="image-container">
-    <img class="image" src = "@/assets/img/strawberryicon.png"/>
+        <img class="image" src="@/assets/img/strawberryicon.png" />
     </div>
 
 </template>
 
 <script>
-import Header from './items/Header.vue';
-import ContentBlock from './items/ContentBlock.vue';
+import Header from '../components/items/Header.vue';
+import ContentBlock from '../components/items/ContentBlock.vue';
 
 export default {
     components: {

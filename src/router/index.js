@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Login from '@/views/LoginView.vue'
-import DashboardBolsista from '@/views/DashboardBolsista.vue'
+import DashboardBolsista from '@/views/DashboardBolsistaView.vue'
 import DashboardGerente from '@/views/DashboardTecnicoView.vue'
-import NovoUsuarioBolsista from '@/views/CadastroBolsista.vue'
+import NovoUsuarioBolsista from '@/views/CadastroBolsistaView.vue'
 import NovoUsuarioGerente from '@/views/CadastroTecnicoView.vue'
 
 const routes = [
-  { path: '/spe/api/auth/login', component: Login },
+  { path: '/', component: Login },
 
   // Rotas protegidas com roles específicas
   {
@@ -30,11 +30,11 @@ const routes = [
     component: NovoUsuarioGerente,
     meta: { requiresAuth: true, role: 'ADMIN' }
   },
-  {
-    path: '/teste',
-    component: Teste,
-    meta: { requiresAuth: true } // qualquer usuário logado pode acessar
-  },
+  // {
+  //   path: '/teste',
+  //   component: Teste,
+  //   meta: { requiresAuth: true } // qualquer usuário logado pode acessar
+  // },
   // Fallback para rotas não encontradas
   {
     path: '/:pathMatch(.*)*',

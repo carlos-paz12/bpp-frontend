@@ -3,29 +3,29 @@
 
   <div class="center-container">
     <div class="dashboard-rectangle">
-       <h1>Dashboard</h1>
+      <h1>Dashboard</h1>
 
       <div style="align-self:center;">
-      <table>
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Hora de Entrada</th>
-            <th>Hora de Saída</th>
-            <th>Total de Horas</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(registro, index) in registros" :key="index">
-            <td>{{ formatarData(registro.horasDeEntrada) }}</td>
-            <td>{{ formatarHora(registro.horasDeEntrada) }}</td>
-            <td>{{ registro.horasDeSaida ? formatarHora(registro.horasDeSaida) : '---' }}</td>
-            <td>{{ registro.qtdDeHorasFeitas || '---' }}</td>
-          </tr>
-        </tbody>
-      </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Hora de Entrada</th>
+              <th>Hora de Saída</th>
+              <th>Total de Horas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(registro, index) in registros" :key="index">
+              <td>{{ formatarData(registro.horasDeEntrada) }}</td>
+              <td>{{ formatarHora(registro.horasDeEntrada) }}</td>
+              <td>{{ registro.horasDeSaida ? formatarHora(registro.horasDeSaida) : '---' }}</td>
+              <td>{{ registro.qtdDeHorasFeitas || '---' }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-           <h2> {{ totalHoras }}</h2>
+      <h2> {{ totalHoras }}</h2>
       <!-- Novo input para exibir o total -->
       <div>
 
@@ -45,8 +45,8 @@
 <script>
 import axios from 'axios'
 import { ref } from 'vue'
-import Popup from './items/Popup.vue'
-import Header from './items/Header.vue'
+import Popup from '../components/items/Popup.vue'
+import Header from '../components//items/Header.vue'
 
 // Função para verificar se o token é válido
 function isTokenValid(token) {

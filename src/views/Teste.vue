@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <main>
         <Header/>
         <h1>Vue Popups</h1>
@@ -46,4 +46,4 @@ export default {
 
 <style>
 
-</style>
+</style> -->

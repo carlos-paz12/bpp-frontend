@@ -1,4 +1,4 @@
-import api from '@/api/http'
+import api from '@/api/index'
 import { getToken, isTokenValid } from './auth_service'
 
 export async function cadastrarBolsista({ username, name, email, password, router }) {
