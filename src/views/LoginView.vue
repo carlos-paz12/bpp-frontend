@@ -44,25 +44,31 @@ export default {
           password: this.password,
         });
 
-        console.log('Resposta do backend:', res.data);
+        let json = await res.data;
+        console.log(json);
 
-        if (res.data.token) {
-          localStorage.setItem('token', res.data.token);
-          localStorage.setItem('role', res.data.role);
-          const role = res.data.role?.toUpperCase();
-          if (role === 'ADMIN' || role === 'TECNICO') {
-            this.$router.push('/spe/api/admin/dashboardGerente');
+
+          localStorage.setItem('token', json.token);
+          localStorage.setItem('role', json.role);
+          
+          const role = json.role?.toUpperCase();
+          
+          if (role === 'ADMIN') {
+
+            this.$router.push('/admin/dashboard');
+
           } else if (role === 'BOLSISTA') {
-            this.$router.push('/spe/api/dashboardBolsista');
+
+            this.$router.push('/bolsista/dashboard');
+
           } else {
-            this.$router.push('/spe/api/auth/login');
+
+            this.$router.push('/login');
+
           }
 
-        } else {
-          this.error = 'Token não retornado pelo servidor';
-        }
       } catch (err) {
-        console.error('Erro na requisição:', err.response);
+        console.error('Erro na requisição:', err);
         this.error = err.response?.data?.error || 'Username ou senha inválidos';
       }
     },
