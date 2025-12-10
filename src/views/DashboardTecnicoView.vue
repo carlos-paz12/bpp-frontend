@@ -29,10 +29,10 @@
     </div>
 
     <div style="margin-top: 20px;">
-      <a href="/spe/api/admin/novoUsuarioBolsista">
+      <a href="/admin/register">
         <button class="button-class">Adicionar Usuário Bolsista</button>
       </a>
-      <a href="../novoUsuarioGerente">
+      <a href="/admin/register">
         <button class="button-class">Adicionar Usuário Gerente</button>
       </a>
     </div>
