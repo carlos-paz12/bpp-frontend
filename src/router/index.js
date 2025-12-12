@@ -31,14 +31,9 @@ const routes = [
     // meta: { requiresAuth: true, role: 'ADMIN' }
   },
   // {
-  //   path: '/admin/novoUsuarioAdmin',
-  //   component: NovoUsuarioAdmin,
-  //   // meta: { requiresAuth: true, role: 'ADMIN' }
-  // },
-  // {
   //   path: '/teste',
   //   component: Teste,
-  //   meta: { requiresAuth: true } // qualquer usuário logado pode acessar
+  //   //meta: { requiresAuth: true } // qualquer usuário logado pode acessar
   // },
   // Fallback para rotas não encontradas
   {
