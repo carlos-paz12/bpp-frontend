@@ -30,10 +30,7 @@
 
     <div style="margin-top: 20px;">
       <a href="/admin/register">
-        <button class="button-class">Adicionar Usuário Bolsista</button>
-      </a>
-      <a href="/admin/register">
-        <button class="button-class">Adicionar Usuário Gerente</button>
+        <button class="button-class">Adicionar Usuário</button>
       </a>
     </div>
   </ContentBlock>
